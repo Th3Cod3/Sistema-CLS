@@ -1,0 +1,77 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="card">
+  <h5 class="card-header">Próximos eventos</h5>
+  <a href="create-event.html" type="button" class="btn btn-outline-secondary btn-lg btn-block rounded-0">Crear evento</a>
+  <div class="card-body">
+    {% if upcomingEvents %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre del Evento</th>
+              <th>Fecha del evento</th>
+              <th>Organizador</th>
+              <th>Editar</th>
+              <th>Nómina</th>
+              <th>Asistencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for upcomingEvents in upcomingEvents %}
+              <tr>
+                <td>{{ upcomingEvents.event_id }}</td>
+                <td><a href="event-post.html">{{ upcomingEvents.event_title }}</a></td>
+                <td>{{ upcomingEvents.event_start_date|date("m/d/Y H:i:s") }}</td>
+                <td>{{ upcomingEvents.event_member_id }}</td>
+                <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
+                <td><a href="event-person-list.html" class="btn btn-primary">Nómina</a></td>
+                <td><a href="assistance.html" class="btn btn-primary">Asistencia</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <h3 class="text-center my-md-5 my-sm-2">No hay ningun evento planiado hasta el momento.</h3>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Here come a if, when oldEvents is empty nothing display -->
+<div class="card my-5">
+  <h5 class="card-header">Últimos eventos</h5>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre del Evento</th>
+            <th>Fecha del evento</th>
+            <th>Organizador</th>
+            <th>Editar</th>
+            <th>Asistencia</th>
+            <th>Debriefing</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for oldEvents in oldEvents %}
+            <tr>
+              <td>{{ oldEvents.event_id }}</td>
+              <td><a href="event-post.html">{{ oldEvents.event_title }}</a></td>
+              <td>{{ oldEvents.event_start_date|date("m/d/Y") }}</td>
+              <td>{{ oldEvents.event_member_id }}</td>
+              <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
+              <td><a href="assistance.html" class="btn btn-primary">Asistencia</a></td>
+              <td><a href="assistance.html" class="btn btn-primary">Debriefing</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

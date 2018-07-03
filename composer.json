@@ -7,12 +7,14 @@
             "email": "th3-cod3-1230@hotmail.com"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        }
-    },
     "require": {
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "twig/twig": "~2.4"
+    },
+    "autoload": {
+         
+        "psr-4": {
+            "App\\": "App/"
+        }
     }
 }
