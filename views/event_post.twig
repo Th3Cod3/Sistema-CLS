@@ -1,0 +1,60 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<!--   <pre>
+  {{ dump(eventInfo) }}
+</pre> -->
+  <div class="card text-white bg-secondary">
+    <h4 class="card-header">Briefing</h4>
+    <div class="body p-3">
+      <div class="row">
+        <div class="col-lg-8">
+          <h5 class="card-title">{{ eventInfo[0].event_title|html }}</h5>
+          {{ eventInfo[0].event_content|bbcode|raw }}
+
+
+        </div>
+        <div class="col-lg-4">
+         
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="card bg-light text-dark">
+                <h4 class="card-header">Asistencia Alfa</h4>
+                <div class="body p-3">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="card bg-light text-dark">
+                <h4 class="card-header">Asistencia Bravo</h4>
+                <div class="body p-3">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="card bg-light text-dark">
+                <h4 class="card-header">Asistencia Otros</h4>
+                <div class="body p-3">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

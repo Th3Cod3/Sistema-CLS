@@ -1,0 +1,170 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<form action="event.html" method="POST">
+  <div class="card">
+    <h4 class="card-header">Asistencias</h4>
+    <div class="body p-3">
+      <h4>Tomar asistencia del personal</h4>
+      <div class="row my-3">
+
+        {% if assistance.alpha %}
+        <div class="col-lg-6 col-md-12 my-3">
+          <div class="card">
+            <div class="card-header">
+              <h5>Alfa</h5> 
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>Asistencia</th>
+                      <th>Nombre</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for alpha in assistance.alpha %}
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>Asistencia</option>
+                            <option>Parcial</option>
+                            <option>Falto</option>
+                            <option>No Aplica</option>
+                          </select>
+                        </td>
+                        <td><label> {{ alpha.name }}</label></td>
+                        <td>Activo(Fijo)</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if assistance.bravo %}
+        <div class="col-lg-6 col-md-12 my-3">
+          <div class="card">
+            <div class="card-header">
+              <h5>Bravo</h5> 
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>Asistencia</th>
+                      <th>Nombre</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for bravo in assistance.bravo %}
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>Asistencia</option>
+                            <option>Parcial</option>
+                            <option>Falto</option>
+                            <option>No Aplica</option>
+                          </select>
+                        </td>
+                        <td><label> {{ bravo.name }}</label></td>
+                        <td>Activo(Fijo)</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if assistance.recruit %}
+        <div class="col-lg-6 col-md-12 my-3">
+          <div class="card">
+            <div class="card-header">
+              <h5>Reclutas</h5> 
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>Asistencia</th>
+                      <th>Nombre</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for recruit in assistance.recruit %}
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>Asistencia</option>
+                            <option>Parcial</option>
+                            <option>Falto</option>
+                            <option>No Aplica</option>
+                          </select>
+                        </td>
+                        <td><label> {{ recruit.name }}</label></td>
+                        <td>Activo(Fijo)</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if assistance.state %}
+        <div class="col-lg-6 col-md-12 my-3">
+          <div class="card">
+            <div class="card-header">
+              <h5>Estado Mayor</h5> 
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table text-left">
+                  <thead>
+                    <tr>
+                      <th>Asistencia</th>
+                      <th>Nombre</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for state in assistance.state %}
+                      <tr>
+                        <td>
+                          <select class="form-control">
+                            <option>Asistencia</option>
+                            <option>Parcial</option>
+                            <option>Falto</option>
+                            <option>No Aplica</option>
+                          </select>
+                        </td>
+                        <td><label> {{ state.name }}</label></td>
+                        <td>Activo(Fijo)</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <input type="submit" value="Guardar" class="btn btn-outline-info btn-lg btn-block rounded-0">
+  </div>
+</form>
+{% endblock %}

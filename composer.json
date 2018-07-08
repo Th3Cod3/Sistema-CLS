@@ -9,7 +9,8 @@
     ],
     "require": {
         "phroute/phroute": "^2.1",
-        "twig/twig": "~2.4"
+        "twig/twig": "~2.4",
+        "chriskonnertz/bbcode": "^1.1"
     },
     "autoload": {
          

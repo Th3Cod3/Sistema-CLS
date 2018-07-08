@@ -20,6 +20,7 @@ $router->controller('/events', App\Controllers\System\EventController::class);
 
 
 
+
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $route);
 

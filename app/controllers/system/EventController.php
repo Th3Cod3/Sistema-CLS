@@ -3,29 +3,41 @@
 	namespace App\Controllers\System;
 
 use App\Controllers\BaseController;
+use App\Model\EventsModel;
 
-	class EventController extends BaseController {
-		public function getIndex()
-		{
-			//get all comming events
-			$searchDate = new \DateTime();
+class EventController extends BaseController {
+/*	private $events;
 
-			global $pdo;
+	public function __construct()
+	{
+		$this->events = new EventsModel();
+	}*/
 
-			$sqlDate = $searchDate->format("Y-m-d H:i:s");
-			$sql = "SELECT * FROM ipb_cal_events WHERE event_start_date > '$sqlDate'";
-			$query = $pdo->query($sql);
-			$upcomingEvents = $query->fetchAll(\PDO::FETCH_ASSOC);
+	public function getIndex()
+	{		
+		$events = new EventsModel();
+		$upcomingEvents = $events->newEvents();
+		$oldEvents = $events->oldEvents();
 
-			//get all old events
-			$sql = "SELECT * FROM ipb_cal_events WHERE event_start_date < '$sqlDate' LIMIT 0, 10 ";
-			$query = $pdo->query($sql);
-			$oldEvents = $query->fetchAll(\PDO::FETCH_ASSOC);
-
-			return $this->render('event.twig', ['upcomingEvents' => $upcomingEvents, 'oldEvents' => $oldEvents]);
+		return $this->render('event.twig', ['upcomingEvents' => $upcomingEvents, 'oldEvents' => $oldEvents]);
 
 
-		}
 	}
+
+	public function getBriefing($id)
+	{
+		$events = new EventsModel();
+		$eventInfo = $events->briefing($id);
+		return $this->render('event_post.twig', ['eventInfo' => $eventInfo]);
+	}
+
+		public function getAssistance($id)
+	{
+		$events = new EventsModel();
+		$assistance = $events->assistance($id);
+		return $this->render('assistance.twig', ['assistance' => $assistance]);
+
+	}
+}
 
 ?>

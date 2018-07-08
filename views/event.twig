@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card">
   <h5 class="card-header">Próximos eventos</h5>
-  <a href="create-event.html" type="button" class="btn btn-outline-secondary btn-lg btn-block rounded-0">Crear evento</a>
+  {# <a href="create-event.html" type="button" class="btn btn-outline-secondary btn-lg btn-block rounded-0">Crear evento</a> #}
   <div class="card-body">
     {% if upcomingEvents %}
       <div class="table-responsive">
@@ -14,21 +14,21 @@
               <th>Nombre del Evento</th>
               <th>Fecha del evento</th>
               <th>Organizador</th>
-              <th>Editar</th>
-              <th>Nómina</th>
+              {# <th>Editar</th>
+              <th>Nómina</th> #}
               <th>Asistencia</th>
             </tr>
           </thead>
           <tbody>
-            {% for upcomingEvents in upcomingEvents %}
+            {% for upcomingEvent in upcomingEvents %}
               <tr>
-                <td>{{ upcomingEvents.event_id }}</td>
-                <td><a href="event-post.html">{{ upcomingEvents.event_title }}</a></td>
-                <td>{{ upcomingEvents.event_start_date|date("m/d/Y H:i:s") }}</td>
-                <td>{{ upcomingEvents.event_member_id }}</td>
-                <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
-                <td><a href="event-person-list.html" class="btn btn-primary">Nómina</a></td>
-                <td><a href="assistance.html" class="btn btn-primary">Asistencia</a></td>
+                <td>{{ upcomingEvent.event_id }}</td>
+                <td><a href="{{ 'events/' | url}}briefing/{{ upcomingEvent.event_id }}">{{ upcomingEvent.event_title|html }}</a></td>
+                <td>{{ upcomingEvent.event_start_date|date("d/m/Y H:i") }}</td>
+                <td>{{ upcomingEvent.name }}</td>
+                {# <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
+                <td><a href="event-person-list.html" class="btn btn-primary">Nómina</a></td> #}
+                <td><a href="{{ 'events/' | url}}assistance/{{ upcomingEvent.event_id }}" class="btn btn-primary">Asistencia</a></td>
               </tr>
             {% endfor %}
           </tbody>
@@ -52,21 +52,21 @@
             <th>Nombre del Evento</th>
             <th>Fecha del evento</th>
             <th>Organizador</th>
-            <th>Editar</th>
+            {# <th>Editar</th> #}
             <th>Asistencia</th>
-            <th>Debriefing</th>
+            {# <th>Debriefing</th> #}
           </tr>
         </thead>
         <tbody>
-          {% for oldEvents in oldEvents %}
+          {% for oldEvent in oldEvents %}
             <tr>
-              <td>{{ oldEvents.event_id }}</td>
-              <td><a href="event-post.html">{{ oldEvents.event_title }}</a></td>
-              <td>{{ oldEvents.event_start_date|date("m/d/Y") }}</td>
-              <td>{{ oldEvents.event_member_id }}</td>
-              <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
+              <td>{{ oldEvent.event_id }}</td>
+              <td><a href="{{ 'events/' | url}}briefing/{{ oldEvent.event_id }}">{{ oldEvent.event_title|html }}</a></td>
+              <td>{{ oldEvent.event_start_date|date("d/m/Y H:i") }}</td>
+              <td>{{ oldEvent.name }}</td>
+              {# <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td> #}
               <td><a href="assistance.html" class="btn btn-primary">Asistencia</a></td>
-              <td><a href="assistance.html" class="btn btn-primary">Debriefing</a></td>
+              {# <td><a href="assistance.html" class="btn btn-primary">Debriefing</a></td> #}
             </tr>
           {% endfor %}
         </tbody>
