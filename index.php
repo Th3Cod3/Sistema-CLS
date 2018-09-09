@@ -16,7 +16,8 @@ $router = new Phroute\Phroute\RouteCollector();
 
 
 $router->controller('/', App\Controllers\IndexController::class);
-$router->controller('/events', App\Controllers\System\EventController::class);
+$router->controller('events', App\Controllers\System\EventsController::class);
+$router->controller('points', App\Controllers\System\PointsController::class);
 
 
 

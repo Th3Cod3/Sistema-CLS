@@ -1,0 +1,166 @@
+{% extends 'layout.twig' %}
+{% block content %}
+  <div class="container">
+  <!-- Point-Card -->
+  {% set procentAssitance = (assistancePoints.assitance / (assistancePoints.absence + assistancePoints.parcial + assistancePoints.mission + assistancePoints.training) * 100) %}
+    {% if procentAssitance > 100 %}
+      {% set procentAssitance = 100 %}
+    {% endif %}
+{#   {% if soldierInfo %} #}
+    <div class="card text-center mb-3">
+      <a href="{{ 'points' | url }}" class="btn btn-outline-info btn-lg btn-block rounded-0">Regresar</a>
+        <h1>{{ soldierInfo.name }}</h1>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-8 col-md-12">
+    <!-- Rank bra -->
+            <div class="card mb-2">
+              <h5 class="card-header">Puntos</h5>
+              <div class="progress push m-3">
+                  <div class="progress-bar" role="progressbar" style="width: 71%;" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100">
+                  <span class="font-size-sm font-w600">71%</span>
+                  </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-lg-8 col-md-12">
+                <table class="table text-left mt-3">
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Puntos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>Asistencia</td>
+                        <td>{{ assistancePoints.total_points | number_format("0")}}</td>
+                      </tr>
+                      <tr>
+                        <td>Cursos</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>Compensaciones</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>DMOS</td>
+                        <td>-</td>
+                      </tr>
+                  </tbody>
+                </table>  
+              </div>
+              <div class="col-lg-4 col-md-12 m-auto">
+                <div class="">
+                      <p class="display-2"><b>12</b> <span class="display-4"> / 17</span> </p>
+                </div>
+              </div>
+            </div>
+                           
+    <!-- assistance bar -->
+            <div class="card mb-2">
+              <h5 class="card-header">Asistencia</h5>
+              <div class="progress push m-3">
+                  <div class="progress-bar" role="progressbar" style="width: {{ procentAssitance | number_format("0") }}%;" aria-valuenow="{{ procentAssitance | number_format("0") }}" aria-valuemin="0" aria-valuemax="100">
+                      <span class="font-size-sm font-w600">{{ procentAssitance | number_format("0") }}%</span>
+                  </div>
+              </div>
+            </div> 
+    <!-- Assitance Table -->
+            <div class="row">
+              <div class="col-lg-8 col-md-12">
+                <table class="table text-left font-size-sm mt-5">
+                  <thead>
+                    <th>Descripción</th>
+                    <th>Asistencia</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Entrenamiento</td>
+                      <td>{{ assistancePoints.training }}</td>
+                    </tr>
+                    <tr>
+                      <td>Operaciones</td>
+                      <td>{{ assistancePoints.mission }}</td>
+                    </tr>
+                    <tr>
+                      <td>Asistencias Parciales</td>
+                      <td>{{ assistancePoints.parcial }}</td>
+                    </tr>
+                    <tr>
+                      <td>Ausencia</td>
+                      <td>{{ assistancePoints.absence }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-lg-4 col-md-12 m-auto">
+                <p class="display-3"><b>{{ procentAssitance | number_format("0") }}%</b></p>
+              </div>
+            </div>
+          </div>
+          <!-- Informacion General -->
+          <div class="col-lg-4 col-md-12">
+            <div class="card bg-secondary text-white mb-3">
+              <div class="card-header">
+                <h5>Información General</h5> 
+              </div>
+              <div class="card-body">
+                <table class="table text-left mt-3">
+                  <tbody>
+                      <tr>
+                        <td>Fecha de Ingreso</td>
+                        <td>{{ soldierInfo.enlistment_date | date('d M Y') }}</td>
+                      </tr>
+                      <tr>
+                        <td>Tiempo en Servicio (T.E.S)</td>
+                        <td>{{ soldierInfo.induction_date | tiempo }}</td>
+                      </tr>
+                      <tr>
+                        <td>Tiempo en Rango (T.E.R)</td>
+                        <td>{{ soldierInfo.promotion_date | tiempo }}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card bg-secondary text-white">
+              <div class="card-header">
+                <h5>Requisitos para Ascenso</h5> 
+              </div>
+              <div class="card-body">
+                <table class="table text-left mt-3">
+                  <tbody>
+                      <tr class="bg-success">
+                        <td>Porcentaje requerido para el siguiente rango:</td>
+                        <td>70%</td>
+                      </tr>
+                      <tr class="bg-danger">
+                        <td>Puntaje requerido para el siguiente rango:</td>
+                        <td>17 Puntos</td>
+                      </tr>
+                      <tr class="bg-success">
+                        <td>Tiempo en Rango (T.E.R)</td>
+                        <td>2 Meses</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+
+
+        
+      </div>
+      <div class="card-footer text-muted">
+        <a href="#" class="btn btn-primary">Volver al foro</a>
+      </div>
+    </div>
+{#   {% endif %} #}
+
+{% endblock %}
+

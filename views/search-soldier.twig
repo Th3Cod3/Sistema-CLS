@@ -1,0 +1,25 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<div class="container">
+  <!-- Search-Card -->
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3 offset-md-0 col-md-12">
+      <div class="card my-2">
+        <h5 class="card-header">Tabla de puntos</h5>
+        <div class="card-body">
+          <form action="{{ 'points/search' | url}}" method="POST">
+            <input type="text" placeholder="Introduzca su nombre" class="form-control form-control-lg" name="cls-soldier" id="inputNombre" list="cls-soldier" required>
+            <datalist id="cls-soldier">
+              {% for soldier in soldiers %}
+                <option value="{{ soldier.name }}">
+              {% endfor %}
+            </datalist>
+            <button type="submit" class="btn btn-primary mt-2 float-right">Ver puntos</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,5 +1,5 @@
 <?php  
-namespace App\Model;
+namespace App\Models;
 
 
 class EventsModel 
@@ -15,8 +15,8 @@ class EventsModel
 				e.event_title, 
 				e.event_start_date, 
 				m.name
-			FROM ipb_cal_events as e 
-			JOIN ipb_members as m 
+			FROM ipb_cal_events AS e 
+			JOIN ipb_members AS m 
 			ON e.event_member_id=m.member_id 
 			WHERE event_start_date >= '$sqlDate' 
 			ORDER BY e.event_start_date 
@@ -39,8 +39,8 @@ class EventsModel
 				e.event_title, 
 				e.event_start_date, 
 				m.name 
-			FROM ipb_cal_events as e 
-			JOIN ipb_members as m 
+			FROM ipb_cal_events AS e 
+			JOIN ipb_members AS m 
 			ON e.event_member_id=m.member_id 
 			WHERE event_start_date < '$sqlDate' 
 			ORDER BY e.event_start_date 
@@ -53,7 +53,7 @@ class EventsModel
 		return $oldEvents;
 	}
 	
-	public function briefing($id)
+	public function briefing($event_id)
 	{
 		global $pdo;
 
@@ -63,18 +63,21 @@ class EventsModel
 				e.event_start_date, 
 				m.name, 
 				e.event_content 
-			FROM ipb_cal_events as e 
-			JOIN ipb_members as m 
+			FROM ipb_cal_events AS e 
+			JOIN ipb_members AS m 
 			ON e.event_member_id=m.member_id 
-			WHERE e.event_id = $id";
+			WHERE e.event_id = :event_id";
 
-		$query = $pdo->query($sql);
-		$eventInfo = $query->fetchAll(\PDO::FETCH_ASSOC);
-		return $eventInfo;
+		$query = $pdo->prepare($sql);
+		$result = $query->execute([
+			'event_id' => $event_id
+		]);
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
 
 	}
 
-	public function assistance($id)	
+/*
+	public function assistance($event_id)	
 	{
 		global $pdo;
 
@@ -83,19 +86,22 @@ class EventsModel
 				e.event_title, 
 				e.event_start_date, 
 				m.name 
-			FROM ipb_cal_events as e 
-			JOIN ipb_members as m 
+			FROM ipb_cal_events AS e 
+			JOIN ipb_members AS m 
 			ON e.event_member_id=m.member_id 
-			WHERE e.event_id = $id";
+			WHERE e.event_id = :event_id";
 
-		$query = $pdo->query($sql);
+		$query = $pdo->prepare($sql);
+		$result = $query->execute([
+			'event_id' => $event_id
+		]);
 		$eventInfo = $query->fetchAll(\PDO::FETCH_ASSOC);
 
 		$sql = "SELECT 
 				pp.member_id, 
 				m.name 
-			FROM ipb_perscom_personnel as pp 
-			JOIN ipb_members as m 
+			FROM ipb_perscom_personnel AS pp 
+			JOIN ipb_members AS m 
 			ON pp.member_id=m.member_id 
 			WHERE pp.combat_unit = 1";
 		$query = $pdo->query($sql);
@@ -104,8 +110,8 @@ class EventsModel
 		$sql = "SELECT 
 				pp.member_id, 
 				m.name 
-			FROM ipb_perscom_personnel as pp 
-			JOIN ipb_members as m 
+			FROM ipb_perscom_personnel AS pp 
+			JOIN ipb_members AS m 
 			ON pp.member_id=m.member_id 
 			WHERE pp.combat_unit = 2";
 		$query = $pdo->query($sql);
@@ -114,8 +120,8 @@ class EventsModel
 		$sql = "SELECT 
 				pp.member_id, 
 				m.name 
-			FROM ipb_perscom_personnel as pp 
-			JOIN ipb_members as m 
+			FROM ipb_perscom_personnel AS pp 
+			JOIN ipb_members AS m 
 			ON pp.member_id=m.member_id 
 			WHERE pp.combat_unit = 4";
 		$query = $pdo->query($sql);
@@ -124,16 +130,16 @@ class EventsModel
 		$sql = "SELECT 
 				pp.member_id, 
 				m.name 
-			FROM ipb_perscom_personnel as pp 
-			JOIN ipb_members as m 
+			FROM ipb_perscom_personnel AS pp 
+			JOIN ipb_members AS m 
 			ON pp.member_id=m.member_id 
 			WHERE pp.combat_unit = 9";
 		$query = $pdo->query($sql);
 		$state = $query->fetchAll(\PDO::FETCH_ASSOC);
 
 
-		return ['alpha' => $alpha, 'bravo' => $bravo, 'recruit' => $recruit, 'state' => $state,];
-	}
+		return [[ 'combat_unit' => 'Escuadra Alfa' , 'units' => $alpha], [ 'combat_unit' => 'Escuadra bravo', 'units' => $bravo], ['combat_unit' => 'Escuela de InfanterÃ­a Regular', 'units' => $recruit], ['combat_unit' => 'Estado Mayor', 'units' => $state]];
+	}*/
 }
 
 ?>

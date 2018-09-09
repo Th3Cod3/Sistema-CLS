@@ -5,7 +5,7 @@
 	class IndexController extends BaseController{
 		public function anyIndex()
 		{
-			header('Location: ' . BASE_URL . '/pointCard');
+			header('Location: ' . BASE_URL . 'points');
 		}
 	}
 
