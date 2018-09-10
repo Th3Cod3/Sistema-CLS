@@ -40,25 +40,41 @@ class EventsController extends BaseController {
 		$button = 'Next';
 		$eventsModels = new EventsModel();
 		$unitsModel = new UnitsModel();
+		$attendantsModel = new AttendantsModel();
+		if(isset($_POST['soldiers'])){
+			foreach ($_POST['soldiers'] as $soldier) {
+				$exist = $attendantsModel->checkAssistenceForEvent($event_id, $soldier['member_id']);
+				$soldier['event_id'] = $event_id;
+				if (!$exist)
+					$save = $attendantsModel->saveAttendant($soldier);
+				else
+					$save = $attendantsModel->updateAttendant($soldier);
+
+			}
+		}
+		
 		$combat_units = $unitsModel->getCombatUnits();
 		if(isset($_POST['unit_id'])){
 			$button = 'Guardar';
-			$attendantsModel = new AttendantsModel();
+			
 			$personnel = $unitsModel->personnelByUnit($_POST['unit_id']);
 			$attendantOption = $attendantsModel->getAssistanceOptionByType(1);
 			foreach ($personnel as $key => $soldier) {
 				$attendant = $attendantsModel->checkAssistenceForEvent($event_id, $soldier['member_id']);
-				var_dump($attendant);
 				if ($attendant)
 					$personnel[$key]['attendantPoint'] = $attendant['assistance_point_id'];
+
 			}
 		}
+		
 
 		return $this->render('assistance.twig', [
+			'event_id' => $event_id,
 			'personnel' => $personnel ?? '', 
 			'combat_units' => $combat_units, 
 			'attendantOption' => $attendantOption ?? '', 
-			'button' => $button
+			'button' => $button,
+			'attendantRequest' => $_POST ?? $attendant
 		]);
 
 	}

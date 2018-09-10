@@ -35,6 +35,38 @@ class AttendantsModel
 
 		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
+
+	public function saveAttendant($request)
+	{
+		global $pdo;
+
+		$sql = 'INSERT INTO pcls_assistances(member_id, event_id, assistance_point_id) VALUES (:member_id, :event_id, :assistance_point_id)';
+
+		$query = $pdo->prepare($sql);
+		$result = $query->execute([
+			'member_id' => $request['member_id'],
+			'assistance_point_id' => $request['assistance_point_id'],
+			'event_id' => $request['event_id']
+		]);
+
+		return $result;
+	}
+
+	public function updateAttendant($request)
+	{
+		global $pdo;
+
+		$sql = 'UPDATE pcls_assistances SET assistance_point_id = :assistance_point_id WHERE member_id = :member_id AND event_id = :event_id';
+
+		$query = $pdo->prepare($sql);
+		$result = $query->execute([
+			'member_id' => $request['member_id'],
+			'assistance_point_id' => $request['assistance_point_id'],
+			'event_id' => $request['event_id']
+		]);
+
+		return $result;
+	}
 }
 
  ?>

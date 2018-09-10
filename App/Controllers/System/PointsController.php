@@ -21,7 +21,6 @@ class PointsController extends BaseController
 	{
 		$pointsModel = new PointsModel();
 		$soldiers = $pointsModel->search($_POST['cls-soldier']);
-		var_dump($soldiers[0]['member_id']);
 		header("Location:".BASE_URL.'points/soldierinfo/'.$soldiers[0]['member_id']);
 	}
 

@@ -23,9 +23,9 @@ class UnitsModel
 	{
 		global $pdo;
 
-		$sql = "SELECT * FROM ipb_perscom_personnel AS pp 
+		$sql = "SELECT pp.member_id, m.name FROM ipb_perscom_personnel AS pp 
 			JOIN ipb_members AS m 
-			ON pp.member_id=m.member_id 
+			ON pp.member_id = m.member_id 
 			WHERE pp.combat_unit = :combat_unit";
 
 		$query = $pdo->prepare($sql);

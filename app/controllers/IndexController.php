@@ -1,13 +1,15 @@
-<?php  
+<?php 
 
-	namespace App\Controllers;
+namespace App\Controllers;
 
-	class IndexController extends BaseController{
-		public function anyIndex()
-		{
-			header('Location: ' . BASE_URL . 'points');
-		}
+use App\Controllers\BaseController;
+
+class IndexController extends BaseController{
+	public function anyIndex()
+	{
+		header('Location: ' . BASE_URL . 'points');
 	}
+}
 
 
 ?>
