@@ -7,7 +7,7 @@
       <div class="card my-2">
         <h5 class="card-header">Tabla de puntos</h5>
         <div class="card-body">
-          <form action="{{ 'points/search' | url}}" method="POST">
+          <form method="POST">
             <input type="text" placeholder="Introduzca su nombre" class="form-control form-control-lg" name="cls-soldier" id="inputNombre" list="cls-soldier" required>
             <datalist id="cls-soldier">
               {% for soldier in soldiers %}

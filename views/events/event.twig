@@ -23,12 +23,12 @@
             {% for upcomingEvent in upcomingEvents %}
               <tr>
                 <td>{{ upcomingEvent.event_id }}</td>
-                <td><a href="{{ 'events/' | url}}briefing/{{ upcomingEvent.event_id }}">{{ upcomingEvent.event_title|html }}</a></td>
+                <td><a href="{{ 'points/briefing/' | url}}{{ upcomingEvent.event_id }}">{{ upcomingEvent.event_title|html }}</a></td>
                 <td>{{ upcomingEvent.event_start_date|date("d/m/Y H:i") }}</td>
                 <td>{{ upcomingEvent.name }}</td>
                 {# <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td>
                 <td><a href="event-person-list.html" class="btn btn-primary">Nómina</a></td> #}
-                <td><a href="{{ 'events/' | url}}assistance/{{ upcomingEvent.event_id }}" class="btn btn-primary">Asistencia</a></td>
+                <td><a href="{{ 'points/assistance/' | url}}{{ upcomingEvent.event_id }}" class="btn btn-primary">Asistencia</a></td>
               </tr>
             {% endfor %}
           </tbody>
@@ -61,7 +61,7 @@
           {% for oldEvent in oldEvents %}
             <tr>
               <td>{{ oldEvent.event_id }}</td>
-              <td><a href="{{ 'events/' | url}}briefing/{{ oldEvent.event_id }}">{{ oldEvent.event_title|html }}</a></td>
+              <td><a href="{{ 'points/events/' | url}}briefing/{{ oldEvent.event_id }}">{{ oldEvent.event_title|html }}</a></td>
               <td>{{ oldEvent.event_start_date|date("d/m/Y H:i") }}</td>
               <td>{{ oldEvent.name }}</td>
               {# <td><a href="edit-event.html" class="btn btn-primary">Editar</a></td> #}

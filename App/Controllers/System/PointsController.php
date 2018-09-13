@@ -7,21 +7,20 @@ use App\Models\PointsModel;
 
 class PointsController extends BaseController
 {
-	public function getIndex()
+	public function anySearch()
 	{
 		$pointsModel = new PointsModel();
 		$soldiers = $pointsModel->getAllNames();
+		$pointsModel = new PointsModel();
+		if(isset($_POST['cls-soldier'])){
+			$soldier = $pointsModel->search($_POST['cls-soldier']);
+			if($soldier)
+				header("Location:".BASE_URL.'points/card/soldierinfo/'.$soldier['member_id']);
+		}
 
-		return $this->render('search-soldier.twig',[
+		return $this->render('point-card/search-soldier.twig',[
 			'soldiers' => $soldiers
 		]);
-	}
-
-	public function postSearch()
-	{
-		$pointsModel = new PointsModel();
-		$soldiers = $pointsModel->search($_POST['cls-soldier']);
-		header("Location:".BASE_URL.'points/soldierinfo/'.$soldiers[0]['member_id']);
 	}
 
 	public function getSoldierinfo($soldier_id)
@@ -31,7 +30,7 @@ class PointsController extends BaseController
 
 		$assistancePoints = $pointsModel->getPointsByMember($soldier['member_id']);
 
-		return $this->render('point-card.twig',[
+		return $this->render('point-card/point-card.twig',[
 			'soldierInfo' => $soldier, 
 			'assistancePoints' => $assistancePoints
 		]);

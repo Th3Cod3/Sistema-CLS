@@ -11,8 +11,10 @@
     <title>CLS | Eventos</title>
   </head>
   <body>
+    {% if not del_nav %}
+      {% include "nav.twig" %}
+    {% endif %}
     <div class="container py-5">
-
       {% block content %}{% endblock %}
 
       

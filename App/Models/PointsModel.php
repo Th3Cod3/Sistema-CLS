@@ -18,7 +18,7 @@ class PointsModel
 			':name' => $user_name
 		]);
 
-		return $query->fetchAll(\PDO::FETCH_ASSOC);
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 
 	public function getAllNames()

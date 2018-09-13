@@ -14,13 +14,13 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class EventsController extends BaseController {
 
 
-	public function getIndex()
-	{		
+	public function getEvents()
+	{
 		$eventsModels = new EventsModel();
 		$upcomingEvents = $eventsModels->newEvents();
 		$oldEvents = $eventsModels->oldEvents();
 
-		return $this->render('event.twig', [
+		return $this->render('events/event.twig', [
 			'upcomingEvents' => $upcomingEvents, 
 			'oldEvents' => $oldEvents
 		]);
@@ -30,14 +30,14 @@ class EventsController extends BaseController {
 	{
 		$eventsModels = new EventsModel();
 		$eventInfo = $eventsModels->briefing($event_id);
-		return $this->render('event_post.twig', [
+		return $this->render('events/event_post.twig', [
 			'eventInfo' => $eventInfo
 		]);
 	}
 
 		public function anyAssistance($event_id)
 	{
-		$button = 'Next';
+		$button = 'Ver';
 		$eventsModels = new EventsModel();
 		$unitsModel = new UnitsModel();
 		$attendantsModel = new AttendantsModel();
@@ -45,10 +45,12 @@ class EventsController extends BaseController {
 			foreach ($_POST['soldiers'] as $soldier) {
 				$exist = $attendantsModel->checkAssistenceForEvent($event_id, $soldier['member_id']);
 				$soldier['event_id'] = $event_id;
-				if (!$exist)
-					$save = $attendantsModel->saveAttendant($soldier);
-				else
-					$save = $attendantsModel->updateAttendant($soldier);
+				if($soldier['assistance_point_id']){
+					if (!$exist)
+						$save = $attendantsModel->saveAttendant($soldier);
+					else
+						$save = $attendantsModel->updateAttendant($soldier);
+				}
 
 			}
 		}
@@ -68,7 +70,7 @@ class EventsController extends BaseController {
 		}
 		
 
-		return $this->render('assistance.twig', [
+		return $this->render('events/assistance.twig', [
 			'event_id' => $event_id,
 			'personnel' => $personnel ?? '', 
 			'combat_units' => $combat_units, 
