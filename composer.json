@@ -11,7 +11,8 @@
         "phroute/phroute": "^2.1",
         "twig/twig": "~2.4",
         "chriskonnertz/bbcode": "^1.1",
-        "phpoffice/phpspreadsheet": "^1.3"
+        "phpoffice/phpspreadsheet": "^1.3",
+        "siriusphp/validation": "^2.2"
     },
     "autoload": {
          

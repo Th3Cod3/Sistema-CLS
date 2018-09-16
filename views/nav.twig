@@ -8,7 +8,7 @@
 					<a class="nav-link" href="{{ 'points/events' | url }}">Asistencia</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ 'dmos' | url }}">DMOS</a>
+					<a class="nav-link" href="{{ 'points/dmos' | url }}">DMOS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ 'points/card/search' | url }}">Puntos</a>
@@ -18,12 +18,11 @@
 				</li>
 		</ul>
 	</div>
-{#	<ul class="navbar-nav ml-auto">
-		
+	{% if not admin %}
+		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a class="navbar-brand" href="{{ 'user/dashboard' | url }}">
-					<img src="http://www.piachievers.com/img/users-male-2.png" class="rounded-circle border border-success" width="40" height="40" alt="profile img"> {{ 'user' | loginUser }}
-				</a>
+				<a class="navbar-brand" href="{{ 'admin' | url }}">Admin Panel</a>
 			</li>
-	</ul> #}
+		</ul> 
+	{% endif %}
 </nav>

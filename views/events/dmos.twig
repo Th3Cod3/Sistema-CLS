@@ -1,0 +1,66 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<form method="POST">
+	<div class="card">
+		<h4 class="card-header">DMOS</h4>
+		{% if not personnel %}
+			<a href="{{ 'points/dmos' | url }}" class="btn btn-outline-info btn-lg btn-block rounded-0">Atrás</a>
+		{% else %}
+			<a href="{{ 'points/dmos/' | url }}{{ event_id }}" class="btn btn-outline-info btn-lg btn-block rounded-0">Atrás</a>
+		{% endif %}
+		<div class="body p-3">
+			<div class="row my-3">
+				{% if not personnel %}
+					<h4>Tomar asistencia del personal</h4>
+					<div class="col-12">
+						<select name="unit_id" class="form-control form-control-lg" required>
+							<option value="">Seleccione</option>
+							{% for unit in combat_units %}
+								<option value="{{ unit.primary_id_field }}">{{ unit.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				{% else %}
+					<div class="col-12 my-3">
+						<div class="">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table text-left">
+										<thead>
+											<tr>
+												<th>Asistencia</th>
+												<th>Nombre</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for soldier in personnel %}
+												<tr>
+													<td>
+														<input type="hidden" name="soldiers[{{ soldier.member_id }}][member_id]" value="{{ soldier.member_id }}")>
+														<select name="soldiers[{{ soldier.member_id }}][assistance_point_id]" class="form-control">
+															<option value="">Choose...</option>
+															{% for option in attendantOption %}
+															<option value="{{ option.assistance_point_id }}" {% if soldier.attendantPoint == option.assistance_point_id %}selected{% endif %}>({{ option.point_abbreviation }}) {{ option.point_name }}</option>
+															{% endfor %}
+														</select>
+													</td>
+													<td><label>{{ soldier.name }}</label></td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<input type="hidden" name="event_id" value="{{ event_id }}">
+		{% if attendantRequest.unit_id %}
+			<input type="hidden" name="unit_id" value="{{ attendantRequest.unit_id }}">
+		{% endif %}
+		<input type="submit" value="{{ button }}" class="btn btn-outline-info btn-lg btn-block rounded-0">
+	</div>
+</form>
+{% endblock %}

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 
-class BaseController {
+class TwigController {
 
 	protected $templateEngine;
 

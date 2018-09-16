@@ -2,10 +2,10 @@
 
 namespace App\Controllers\System;
 
-use App\Controllers\BaseController;
+use App\Controllers\TwigController;
 use App\Models\PointsModel;
 
-class PointsController extends BaseController
+class PointsController extends TwigController
 {
 	public function anySearch()
 	{

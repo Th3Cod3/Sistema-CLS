@@ -2,7 +2,7 @@
 
 namespace App\Controllers\System;
 
-use App\Controllers\BaseController;
+use App\Controllers\TwigController;
 use App\Models\EventsModel;
 use App\Models\UnitsModel;
 use App\Models\attendantsModel;
@@ -11,8 +11,11 @@ use App\Models\attendantsModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class EventsController extends BaseController {
-
+class EventsController extends TwigController {
+	public function anyIndex()
+	{
+		header('Location:'.BASE_URL.'points/events');
+	}
 
 	public function getEvents()
 	{
@@ -79,6 +82,13 @@ class EventsController extends BaseController {
 			'attendantRequest' => $_POST ?? $attendant
 		]);
 
+	}
+
+	public function anyDmos()
+	{
+		return $this->render('events/dmos.twig', [
+			
+		]);
 	}
 
 /*	public function getImport()
