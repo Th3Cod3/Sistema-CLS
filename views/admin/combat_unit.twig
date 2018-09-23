@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="card">
+	<form method="post">
+		<h5 class="card-header">Unidades de Combate</h5>
+		<a href="{{ 'admin' | url }}" type="button" class="btn btn-outline-secondary btn-lg btn-block rounded-0">Atrás</a>
+		<div class="card-body">
+			<p>Los números mas altos tienes mas rango.</p>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nombre de la Escuadra</th>
+							<th>Jerarquía</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for unit in combatUnits %}
+							<tr>
+								<td>{{ unit.name }}</td>
+								<td><input type="number" placeholder="Numero" class="form-control form-control-lg" name="power"></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<input type="button" class="btn btn-secondary btn-lg btn-block rounded-0" value="Guardar">
+	</form>
+</div>
+{% endblock %}

@@ -26,7 +26,9 @@ $router->controller('/', App\Controllers\IndexController::class);
 
 $router->group(['before' => 'auth'], function ($router) {
   $router->controller('points', App\Controllers\System\EventsController::class);
-  $router->controller('points/card', App\Controllers\System\PointsController::class);
+	$router->controller('points/card', App\Controllers\System\PointsController::class);
+	$router->controller('admin', App\Controllers\System\AdminController::class);
+	
 });
 
 

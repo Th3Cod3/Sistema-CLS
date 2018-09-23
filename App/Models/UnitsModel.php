@@ -12,7 +12,6 @@ class UnitsModel
 		global $pdo;
 
 		$sql = "SELECT * FROM ipb_perscom_combat_units";
-
 		$query = $pdo->query($sql);
 
 
@@ -32,6 +31,17 @@ class UnitsModel
 		$result = $query->execute([
 			'combat_unit' => $combat_unit
 		]);
+
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	public function getRanks()
+	{
+		global $pdo;
+
+		$sql = "SELECT * FROM ipb_perscom_ranks";
+		$query = $pdo->query($sql);
+
 
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
