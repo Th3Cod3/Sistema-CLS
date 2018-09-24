@@ -10,23 +10,19 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Rango</th>
-							<th>Jerarquía</th>
-							<th>Abreviación</th>
-							<th>T.E.R.</th>
+							<th>Grupo</th>
 							<th>Asistencia</th>
-							<th>Puntos</th>
+							<th>Admin Panel</th>
+							<th>DMOS</th>
 						</tr>
 					</thead>
 					<tbody>
-						{% for rank in ranks %}
+						{% for group in groups %}
 							<tr>
-								<td>{{ rank.title }}</td>
-								<td>{{ rank.pay_grade }}</td>
-								<td>{{ rank.abbreviation }}</td>
-								<td><input type="number" placeholder="Días" class="form-control form-control-lg" name="time"></td>
-								<td><input type="number" placeholder="Porcentaje (%)" class="form-control form-control-lg" name="attendant"></td>
-								<td><input type="number" placeholder="Puntos" class="form-control form-control-lg" name="points"></td>
+								<td>{{ group.g_title }}</td>
+								<td><input type="checkbox" value="1" class="" name="pcls_attendant"></td>
+								<td><input type="checkbox" value="1" class="" name="pcls_admin"></td>
+								<td><input type="checkbox" value="1" class="" name="pcls_dmos"></td>
 							</tr>
 						{% endfor %}
 					</tbody>

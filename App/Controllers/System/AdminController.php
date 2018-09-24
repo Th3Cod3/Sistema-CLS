@@ -30,12 +30,12 @@ class AdminController extends TwigController
 		]);
 	}
 
-	public function anyPoints()
+	public function anyPermission()
 	{
 		$unitsModel = new UnitsModel();
-		
-		return $this->render('admin/points.twig',[
-			
+		$groups = $unitsModel->getForumGroups();
+		return $this->render('admin/permission.twig',[
+			'groups' => $groups
 		]);
 	}
 
@@ -44,7 +44,7 @@ class AdminController extends TwigController
 		$unitsModel = new UnitsModel();
 		
 		return $this->render('admin/points_card.twig',[
-			
+			'groups' => $groups
 		]);
 	}
 }

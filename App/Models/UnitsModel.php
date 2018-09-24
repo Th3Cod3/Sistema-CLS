@@ -45,6 +45,19 @@ class UnitsModel
 
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+
+	public function getForumGroups()
+	{
+		global $pdo;
+
+		$sql = "SELECT g_title, g_id FROM ipb_groups";
+		$query = $pdo->query($sql);
+
+
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+
 }
 
  ?>
