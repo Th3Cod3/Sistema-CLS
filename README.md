@@ -10,3 +10,6 @@
 * **pcls_attendant** 
 * **pcls_time**
 * **pcls_ter**
+
+3. tabla **ipb_perscom_combat_units**
+* **pcls_power**
