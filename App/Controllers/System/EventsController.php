@@ -22,7 +22,7 @@ class EventsController extends TwigController {
 		$eventsModels = new EventsModel();
 		$upcomingEvents = $eventsModels->newEvents();
 		$oldEvents = $eventsModels->oldEvents();
-
+		
 		return $this->render('events/event.twig', [
 			'upcomingEvents' => $upcomingEvents, 
 			'oldEvents' => $oldEvents
@@ -38,7 +38,7 @@ class EventsController extends TwigController {
 		]);
 	}
 
-		public function anyAssistance($event_id)
+	public function anyAssistance($event_id)
 	{
 		$button = 'Ver';
 		$eventsModels = new EventsModel();
@@ -46,7 +46,7 @@ class EventsController extends TwigController {
 		$attendantsModel = new AttendantsModel();
 		if(isset($_POST['soldiers'])){
 			foreach ($_POST['soldiers'] as $soldier) {
-				$exist = $attendantsModel->checkAssistenceForEvent($event_id, $soldier['member_id']);
+				$exist = $attendantsModel->checkAssistanceForEvent($event_id, $soldier['member_id']);
 				$soldier['event_id'] = $event_id;
 				if($soldier['assistance_point_id']){
 					if (!$exist)
@@ -58,14 +58,14 @@ class EventsController extends TwigController {
 			}
 		}
 		
-		$combat_units = $unitsModel->getCombatUnits();
+		$combat_units = $unitsModel->getCombatUnitsByPower($_SESSION['power'],$_SESSION['combat_unit']);
 		if(isset($_POST['unit_id'])){
 			$button = 'Guardar';
 			
 			$personnel = $unitsModel->personnelByUnit($_POST['unit_id']);
 			$attendantOption = $attendantsModel->getAssistanceOptionByType(1);
 			foreach ($personnel as $key => $soldier) {
-				$attendant = $attendantsModel->checkAssistenceForEvent($event_id, $soldier['member_id']);
+				$attendant = $attendantsModel->checkAssistanceForEvent($event_id, $soldier['member_id']);
 				if ($attendant)
 					$personnel[$key]['attendantPoint'] = $attendant['assistance_point_id'];
 

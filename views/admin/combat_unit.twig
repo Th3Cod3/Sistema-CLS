@@ -16,12 +16,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for unit in combatUnits %}
-							<tr>
-								<td>{{ unit.name }}</td>
-								<td><input type="number" placeholder="Numero" class="form-control form-control-lg" name="power"></td>
-							</tr>
-						{% endfor %}
+						<form method="post">
+							{% for unit in combatUnits %}
+								<tr>
+									<td>{{ unit.name }}</td>
+									<td><input type="number" placeholder="Numero" class="form-control form-control-lg" name="combatUnit[{{unit.primary_id_field}}][power]" value="{{unit.power}}"></td>
+								</tr>
+							{% endfor %}
+						</form>
 					</tbody>
 				</table>
 			</div>

@@ -21,7 +21,7 @@ class AttendantsModel
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function checkAssistenceForEvent($event_id, $member_id)
+	public function checkAssistanceForEvent($event_id, $member_id)
 	{
 		global $pdo;
 

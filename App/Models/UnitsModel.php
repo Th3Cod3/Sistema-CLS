@@ -7,6 +7,7 @@ namespace App\Models;
  */
 class UnitsModel
 {
+//SELECT
 	public function getCombatUnits()
 	{
 		global $pdo;
@@ -17,7 +18,20 @@ class UnitsModel
 
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+	public function getCombatUnitsByPower($power, $primary_id_field)
+	{
+		global $pdo;
 
+		$sql = "SELECT * FROM ipb_perscom_combat_units WHERE power != 0 AND power < :power OR primary_id_field = :primary_id_field";
+		$query = $pdo->prepare($sql);
+		$query->execute([
+			'power' => $power,
+			'primary_id_field' => $primary_id_field
+		]);
+
+
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
 	public function personnelByUnit($combat_unit)
 	{
 		global $pdo;
@@ -56,7 +70,20 @@ class UnitsModel
 
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+// END SELECT
 
+// UPDATE
+public function updateCombatUnitPower()
+{
+	global $pdo;
+
+	$sql = "SELECT g_title, g_id FROM ipb_groups";
+	$query = $pdo->query($sql);
+
+
+	return $query->fetchAll(\PDO::FETCH_ASSOC);
+}
+// END UPDATE
 
 }
 

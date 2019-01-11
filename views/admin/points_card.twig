@@ -1,39 +1,25 @@
 {% extends 'layout.twig' %}
-
 {% block content %}
-<div class="card">
-	<form method="post">
-		<h5 class="card-header">Grupos</h5>
-		<a href="{{ 'admin' | url }}" type="button" class="btn btn-outline-secondary btn-lg btn-block rounded-0">Atrás</a>
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Rango</th>
-							<th>Jerarquía</th>
-							<th>Abreviación</th>
-							<th>T.E.R.</th>
-							<th>Asistencia</th>
-							<th>Puntos</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for rank in ranks %}
-							<tr>
-								<td>{{ rank.title }}</td>
-								<td>{{ rank.pay_grade }}</td>
-								<td>{{ rank.abbreviation }}</td>
-								<td><input type="number" placeholder="Días" class="form-control form-control-lg" name="time"></td>
-								<td><input type="number" placeholder="Porcentaje (%)" class="form-control form-control-lg" name="attendant"></td>
-								<td><input type="number" placeholder="Puntos" class="form-control form-control-lg" name="points"></td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<input type="button" class="btn btn-secondary btn-lg btn-block rounded-0" value="Guardar">
-	</form>
+<div class="container">
+  <!-- Search-Card -->
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3 offset-md-0 col-md-12">
+      <div class="card my-2">
+        <h5 class="card-header">Tabla de puntos</h5>
+        <div class="card-body">
+          <form method="POST">
+            <input type="text" placeholder="Introduzca su nombre" class="form-control form-control-lg" name="cls-soldier" id="inputNombre" list="cls-soldier" required>
+            <datalist id="cls-soldier">
+              {% for soldier in soldiers %}
+                <option value="{{ soldier.name }}">
+              {% endfor %}
+            </datalist>
+            <button type="submit" class="btn btn-primary mt-2 float-right">Ver puntos</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
+

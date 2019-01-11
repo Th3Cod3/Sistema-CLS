@@ -11,17 +11,7 @@
 		{% endif %}
 		<div class="body p-3">
 			<div class="row my-3">
-				{% if not personnel %}
-					<h4>Tomar asistencia del personal</h4>
-					<div class="col-12">
-						<select name="unit_id" class="form-control form-control-lg" required>
-							<option value="">Seleccione</option>
-							{% for unit in combat_units %}
-								<option value="{{ unit.primary_id_field }}">{{ unit.name }}</option>
-							{% endfor %}
-						</select>
-					</div>
-				{% else %}
+				{% if combat_units %}
 					<div class="col-12 my-3">
 						<div class="">
 							<div class="card-body">
@@ -53,6 +43,16 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				{% elseif combat_units %}
+					<h4>Tomar asistencia del personal</h4>
+					<div class="col-12">
+						<select name="unit_id" class="form-control form-control-lg" required>
+							<option value="">Seleccione</option>
+							{% for unit in combat_units %}
+								<option value="{{ unit.primary_id_field }}">{{ unit.name }}</option>
+							{% endfor %}
+						</select>
 					</div>
 				{% endif %}
 			</div>

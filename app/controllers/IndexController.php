@@ -30,6 +30,8 @@ class IndexController extends TwigController{
 						if($cryptPass == $userInfo['members_pass_hash']){
 							$_SESSION['member_id'] = $userInfo['member_id'];
 							$_SESSION['name'] = $userInfo['name'];
+							$_SESSION['power'] = 1;
+							$_SESSION['combat_unit'] = 1;
 							$_SESSION['firstname'] = $userInfo['firstname'];
 							$_SESSION['lastname'] = $userInfo['lastname'];
 							$_SESSION['combat_unit'] = $userInfo['combat_unit'];
